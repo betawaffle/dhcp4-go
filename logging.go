@@ -94,13 +94,17 @@ type serverRecv struct {
 
 func (sr *serverRecv) String() string {
 	buf := new(bytes.Buffer)
-	buf.WriteString(`event=recv mac="`)
+
+	buf.WriteString("event=recv")
+
+	buf.WriteString(` mac="`)
 	buf.WriteString(sr.msg.GetCHAddr().String())
+	buf.WriteString(`"`)
 
 	if sr.msg.GetGIAddr().Equal(sr.ip) {
-		buf.WriteString(`" via=`)
+		buf.WriteString(" via=")
 	} else {
-		buf.WriteString(`" src=`)
+		buf.WriteString(" src=")
 	}
 	buf.WriteString(sr.ip.String())
 
@@ -123,13 +127,17 @@ type serverSend struct {
 
 func (ss *serverSend) String() string {
 	buf := new(bytes.Buffer)
-	buf.WriteString(`event=send mac="`)
+
+	buf.WriteString("event=send")
+
+	buf.WriteString(` mac="`)
 	buf.WriteString(ss.req.GetCHAddr().String())
+	buf.WriteString(`"`)
 
 	if ss.req.GetGIAddr().Equal(ss.ip) {
-		buf.WriteString(`" via=`)
+		buf.WriteString(" via=")
 	} else {
-		buf.WriteString(`" dst="`)
+		buf.WriteString(" dst=")
 	}
 	buf.WriteString(ss.ip.String())
 
